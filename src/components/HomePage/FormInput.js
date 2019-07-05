@@ -2,13 +2,12 @@ import React from 'react';
 
 const FormInput = ({
   onSubmit,
-  requesting,
   username
 }) => (
   <div className='center-page'>
-    <form onSubmit={(values) => onSubmit(values)}>
+    <form onSubmit={(values) => onSubmit(values.target.elements.username.value)}>
       <label>
-        <input defaultValue={username} className="form-control" type="text" name="username" placeholder="Enter username github" disabled={requesting ? "disabled" : null} />
+        <input defaultValue={username} className="form-control" type="text" name="username" placeholder="Enter username github" />
       </label>
       <input className="button" type="submit" value="Submit" />
     </form>

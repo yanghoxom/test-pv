@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FormInput from '../../components/HomePage/FormInput';
@@ -13,7 +13,6 @@ import {
   makeSelectTotalRepos,
 } from './selectors';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import Settings from '../../utils/settings';
 
 class HomePage extends React.Component {
   render(){
@@ -25,7 +24,6 @@ class HomePage extends React.Component {
             [
               <FormInput
                 onSubmit={values => this.props.onSubmitForm(values, this.props.currentPageRepos)}
-                requesting={this.props.requesting}
                 username={this.props.username}
               />,
               this.props.repos.length > 0 ?
@@ -34,8 +32,7 @@ class HomePage extends React.Component {
                   username={this.props.username}
                   loadMore={this.props.loadMore}
                   currentPage={this.props.currentPageRepos}
-                  canLoadMore={this.props.totalRepos/Settings.defaultReposPerPage - this.props.currentPageRepos > 0}
-                  totalCount={`${this.props.repos.length}/${this.props.totalRepos}`}
+                  totalCount={this.props.totalRepos}
                   loadStargazers={this.props.loadStargazers}
                 /> :
                 null,
@@ -60,10 +57,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmitForm: (values, page) => {
+    onSubmitForm: (username, page) => {
       dispatch(
         loadRepos(
-          values.target.elements.username.value, page
+          username, page
         ),
       );
     },

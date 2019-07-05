@@ -4,7 +4,6 @@ import {
   loadReposSuccess,
   loadReposFail,
   loadMoreReposSuccess,
-  loadStargazers,
   loadStargazersSuccess,
   loadStargazersFail,
 } from './actions';

@@ -63,6 +63,12 @@ function homePageReducer(state = initialState, action) {
         requesting: false,
         successful: true,
       });
+    case LOAD_STARGAZERS_FAIL:
+      return state.merge({
+        requesting: false,
+        successful: false,
+        error: action.error,
+      });
     default:
       return state;
   }
